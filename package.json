@@ -16,5 +16,8 @@
     "url": "https://github.com/4bpb/couponer/issues"
   },
   "homepage": "https://github.com/4bpb/couponer#readme",
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
 }
