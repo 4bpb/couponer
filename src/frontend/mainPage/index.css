@@ -1,35 +1,115 @@
-.search { grid-area: search; }
-.button { grid-area: button; }
-.result { grid-area: result; }
-
 
 body{
-  background-color: gray;
+  background-color: #F0ECE3;
+}
+
+
+/* Scroll bar start */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  margin: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* Scroll bar End */
+
+
+#header{
+  width: 100%;
+  height: .5%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  background-color: #DFD3C3;
+}
+
+#result{
+  width: 100%;
+  height: 100%;
+  border: 3px solid #ccc;
+
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+#search{
+  height: 200px;
   position: relative;
-
-}
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'search search search search search search'
-    'button button button button button button'
-    'result result result result result result';
-  grid-auto-flow: row;
-  grid-gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
-
-
-
-}
-
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
 }
 
 
+.Form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
 
+#submit{
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 3px solid #ccc;
+}
+#submit:hover{
+  background-color: #F8F8FF;
+}
+#submit:active{
+  animation-name: submit;
+  animation-duration: .1s;
+  background-color: white;
+}
+
+@keyframes submit {
+  from {background-color: white;}
+  to {background-color: #00b300;}
+}
+
+
+
+
+input[type=text] {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}

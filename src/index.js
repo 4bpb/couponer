@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell, webContents } = require('electron');
 const path = require('path');
+
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -21,7 +22,10 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, './frontend/mainPage/index.html'));
 
   // Open the DevTools.
-
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
 };
 
 // This method will be called when Electron has finished
@@ -29,6 +33,11 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+
+app.on('renderer-process-crashed',()=>{
+  app.quit()
+  createWindow()
+})
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
