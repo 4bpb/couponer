@@ -51,6 +51,64 @@ window.addEventListener('DOMContentLoaded', () => {
 
             
         })
+        .catch(error =>{
+            fetch('https://d.joinhoney.com/v3?operationName=ios_autocomplete&operationVersion=7&variables=%7B%22query%22:%22'+rawurl+'%22%7D', {
+                headers: {
+                    'Host': 'd.joinhoney.com',
+                    'Service-Version': '2.7.0',
+                    'Accept': '*/*',
+                    'Service-Name': 'honey-mobile',
+                    'User-Agent': 'Honey/20 CFNetwork/1325.0.1 Darwin/21.1.0',
+                    'Accept-Language': 'en-US,en;q=0.9'
+                }
+            })
+            .then(res => res.json())
+            .then(json => {
+                let stores = json.data.autocomplete.stores
+                
+
+                stores.forEach(element => {
+                    if(element.name===capurl){
+                        let storeid = element.storeId
+
+                        fetch('https://d.joinhoney.com/v3?operationName=mobile_getStoreById&operationVersion=6', {
+                            method: 'POST',
+                            headers: {
+                                'Host': 'd.joinhoney.com',
+                                'Content-Type': 'application/json',
+                                'Service-Version': '2.7.0',
+                                'Accept': '*/*',
+                                'Service-Name': 'honey-mobile',
+                                'Accept-Language': 'en-US,en;q=0.9',
+                                'User-Agent': 'Honey/20 CFNetwork/1325.0.1 Darwin/21.1.0'
+                            },
+                            body: JSON.stringify({"operationName":"mobile_getStoreById","operationVersion":6,"variables":{"storeId":storeid}})
+                        })
+                        .then(res => res.json())
+                        .then(json => {
+                            let coupons2 = json.data.getStoreById.publicCoupons
+
+                            coupons2.forEach(element => {
+                                let deal = element.code
+                                let description = element.description
+
+
+
+                                couponArray.push(deal+':'+description)
+
+                                var table = document.getElementById("gotresult");
+                
+                                var row = table.insertRow(table.length);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                cell1.innerHTML = deal;
+                                cell2.innerHTML = description;
+                            });
+                        })
+                    }
+                });
+            });
+        })
 
         //Rakuten
         fetch('https://apituner.ecbsn.com/apituner/v1/store/reward/list?channel=3',{
