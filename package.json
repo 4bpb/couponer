@@ -47,7 +47,7 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "foundation-sites": "^6.7.4",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "node-fetch": "^2.6.5"
   },
   "devDependencies": {
